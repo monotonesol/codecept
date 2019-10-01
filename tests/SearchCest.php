@@ -11,10 +11,11 @@ use Page\Acceptance\SearchResult;
  */
 class SearchCest
 {
+    const INSLY_URL = 'https://insly.com/en/';
+
     public function _before(AcceptanceTester $I): void
     {
         $I->amOnPage(Home::URL);
-
     }
 
     /**
@@ -27,9 +28,8 @@ class SearchCest
         $I->fillField(Home::SEARCH_FIELD, 'insly.com');
         $I->pressKey(Home::SEARCH_FIELD, Key::ENTER);
         $I->waitForElementVisible(SearchResult::SEARCH_RESULTS);
-        $I->see("Insly - Simple Insurance Software for Brokers and MGAs", SearchResult::SEARCH_RESULTS);
-        $links = $I->grabAttributeFrom('#search a[href]', 'href');
-        $I->assertContains('https://insly.com/en/', $links);
+        $links = $I->grabAttributeFrom(SearchResult::SEARCH_RESULTS_LINKS, 'href');
+        $I->assertContains(self::INSLY_URL, $links);
     }
 
     /**
@@ -37,7 +37,7 @@ class SearchCest
      */
     public function pageHasCorrectTitle(AcceptanceTester $I): void
     {
-        $I->amOnUrl('https://insly.com/en/');
+        $I->amOnUrl(self::INSLY_URL);
         $I->seeInTitle('Simple Insurance Software for Brokers and MGAs');
     }
 }
