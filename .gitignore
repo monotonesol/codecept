@@ -1,2 +1,4 @@
 .idea
 tests/Support/_generated
+tests/_output/*
+vendor/
