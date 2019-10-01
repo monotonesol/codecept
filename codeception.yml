@@ -1,0 +1,39 @@
+# suite config
+suites:
+  acceptance:
+    actor: AcceptanceTester
+    path: .
+    modules:
+      enabled:
+      - Asserts
+      - WebDriver:
+          url: https://www.google.com/
+          browser: chrome
+          host: chrome
+          wait: 3  # smart wait;
+      - \Helper\Acceptance
+
+    # add Codeception\Step\Retry trait to AcceptanceTester to enable retries
+    step_decorators:
+    - Codeception\Step\ConditionalAssertion
+    - Codeception\Step\TryTo
+    - Codeception\Step\Retry
+
+extensions:
+  enabled: [Codeception\Extension\RunFailed]
+
+params:
+- env
+
+gherkin: []
+
+# additional paths
+paths:
+  tests: tests
+  output: tests/_output
+  data: tests/_data
+  support: tests/Support
+
+settings:
+  shuffle: false
+  lint: true
