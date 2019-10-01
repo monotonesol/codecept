@@ -7,7 +7,7 @@ To run tests
 Pull images:
 
 ```
-cd docker && docker-compose up docker-compose
+cd docker && docker-compose up -d
 ```
 
 Generate helpers
